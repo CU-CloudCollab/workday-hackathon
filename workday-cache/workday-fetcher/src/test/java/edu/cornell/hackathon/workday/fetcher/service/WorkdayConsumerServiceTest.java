@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
+import edu.cornell.hackathon.workday.distcache.DistCache;
 import edu.cornell.hackathon.workday.fetcher.config.Config;
 
 public class WorkdayConsumerServiceTest {
@@ -20,7 +21,7 @@ public class WorkdayConsumerServiceTest {
 
         config.setServiceMap(serviceMap);
 
-        workdayConsumerService = new WorkdayConsumerService(config);
+        workdayConsumerService = new WorkdayConsumerService(config, new DistCache());
 
         Assert.assertTrue(workdayConsumerService.fetchWorkdayData());
     }

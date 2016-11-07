@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="2.1" 
-    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd" 
-    jaxb:extensionBindingPrefixes="xjc">
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+	jaxb:extensionBindingPrefixes="xjc">
 
-    <jaxb:bindings schemaLocation="Job_And_Person.xsd">
-        <jaxb:schemaBindings>
-            <jaxb:package name="edu.cornell.hackathon.workday.jobandperson.model" />
-        </jaxb:schemaBindings>
-    </jaxb:bindings>
+	<jaxb:globalBindings generateIsSetMethod="true">
+		<xjc:serializable uid="12343" />
+	</jaxb:globalBindings>
+
+	<jaxb:bindings schemaLocation="Job_And_Person.xsd">
+		<jaxb:schemaBindings>
+			<jaxb:package name="edu.cornell.hackathon.workday.jobandperson.model" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
 
 </jaxb:bindings>
