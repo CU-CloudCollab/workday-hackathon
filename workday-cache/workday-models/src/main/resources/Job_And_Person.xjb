@@ -7,9 +7,9 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd" 
     jaxb:extensionBindingPrefixes="xjc">
 
-    <jaxb:bindings schemaLocation="Human_Resources.xsd">
+    <jaxb:bindings schemaLocation="Job_And_Person.xsd">
         <jaxb:schemaBindings>
-            <jaxb:package name="edu.cornell.hackathon.workday.hr.model" />
+            <jaxb:package name="edu.cornell.hackathon.workday.jobandperson.model" />
         </jaxb:schemaBindings>
     </jaxb:bindings>
 

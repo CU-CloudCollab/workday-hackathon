@@ -1,0 +1,812 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema elementFormDefault="qualified"
+	attributeFormDefault="qualified"
+	xmlns:wd="urn:com.workday.report/Extract___Job_and_Person"
+	targetNamespace="urn:com.workday.report/Extract___Job_and_Person"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Report_Data" type="wd:Report_DataType" />
+	<xsd:element name="Execute_Report" type="wd:Execute_ReportType" />
+	<xsd:simpleType name="RichText">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	<xsd:simpleType name="Citizenship_StatusReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Citizenship_Status_Code" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LocationReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Location_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OrganizationReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Company_Reference_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Cost_Center_Reference_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Custom_Organization_Reference_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Organization_Reference_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Region_Reference_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Organization_SubtypeReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Organization_Subtype_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Job_FamilyReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Job_Family_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Compensation_GradeReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Compensation_Grade_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Employee_TypeReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Employee_Type_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Pay_Rate_TypeReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Pay_Rate_Type_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Position_Worker_TypeReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Contingent_Worker_Type_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Employee_Type_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Pay_GroupReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Organization_Reference_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CompanyReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Company_Reference_ID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Organization_Reference_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Location_HierarchyReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="Organization_Reference_ID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Unique_IdentifierReferenceEnumeration">
+		<xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="IID" />
+					<wd:enumeration xmlns:wd="urn:com.workday/bsvc"
+						value="WID" />
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Report_ParametersType">
+		<xsd:sequence>
+			<xsd:element name="Netid_List" type="wd:Unique_IdentifierObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Effective_as_of_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Netid" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Termination_Start_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Termination_End_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Active_Status" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="Job_Code" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Legal_Name_-_First_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Legal_Name_-_Last_Name" type="xsd:string"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Report_EntryType">
+		<xsd:sequence>
+			<xsd:element name="Employee_ID" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Netid" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Legal_Name_in_General_Display_Format"
+				type="xsd:string" minOccurs="0" />
+			<xsd:element name="Legal_Name_-_Salutation" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Legal_Name_-_Social_Suffix" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Legal_Name_-_Last_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Legal_Name_-_Middle_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Legal_Name_-_First_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name" type="wd:Unique_IdentifierObjectType"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name_-_Social_Suffix" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name_-_Salutation" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name_-_First_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name_-_Middle_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Preferred_Name_-_Last_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Original_Hire_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Phone_-_Primary_Work" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Currently_Active" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="On_Leave" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="Is_Retiree" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="Employee_Type" type="wd:Employee_TypeObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Termination_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Email_Primary_Work" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Workd_Address_1" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Workd_Address_2" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Workd_Address_City" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Workd_Address_State" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Workd_Address_Postal" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Citizenship_USA_Status_Only" type="wd:Citizenship_StatusObjectType"
+				minOccurs="0" />
+			<xsd:element name="All_Positions___Jobs" type="wd:All_Positions___JobsType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="All_Positions___JobsType">
+		<xsd:sequence>
+			<xsd:element name="Job_Code" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Job_Profile_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Business_Title" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Position_ID" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Primary_Job" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="Position_Worker_Type" type="wd:Position_Worker_TypeObjectType"
+				minOccurs="0" />
+			<xsd:element name="Compensation_Grade" type="wd:Compensation_GradeObjectType"
+				minOccurs="0" />
+			<xsd:element name="Exempt" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="Hourly_Rate_-_Amount" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="Total_Base_Pay_-_Amount" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="Compensation_Step_Effective_Date"
+				type="xsd:date" minOccurs="0" />
+			<xsd:element name="Job_Family_Group" type="wd:Job_FamilyObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Job_Families" type="wd:Job_FamilyObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Location" type="wd:LocationObjectType"
+				minOccurs="0" />
+			<xsd:element name="Location_Hierarchy" type="wd:Location_HierarchyObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Manager_ID" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Pay_Group" type="wd:Pay_GroupObjectType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Pay_Rate_Type" type="wd:Pay_Rate_TypeObjectType"
+				minOccurs="0" />
+			<xsd:element name="Scheduled_Weekly_Hours" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="Default_Weekly_Hours" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="Actual_Job_Duration" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="Standard_Full_Time_Duration" type="xsd:decimal"
+				minOccurs="0" />
+			<xsd:element name="FTE__" type="xsd:decimal" minOccurs="0" />
+			<xsd:element name="Company" type="wd:CompanyObjectType"
+				minOccurs="0" />
+			<xsd:element name="CU_College_Unit" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Supervisory_Organization_Subtype"
+				type="wd:Organization_SubtypeObjectType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="Supervisory_Organization_Name" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="Supervisory_Organization_Code" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="CFINT-Position-Supervisory-Organization-RefID"
+				type="xsd:string" minOccurs="0" />
+			<xsd:element name="End_Employment_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="KFS_Org" type="xsd:string" minOccurs="0" />
+			<xsd:element name="KFS_Org_Name" type="wd:OrganizationObjectType"
+				minOccurs="0" />
+			<xsd:element name="Is_Temp_Casual" type="xsd:boolean"
+				minOccurs="0" />
+			<xsd:element name="Assignment_Start_Date" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="Budgeted" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Citizenship_StatusObjectType">
+		<xsd:annotation xmlns:wstxns1="urn:com.workday/bsvc"
+			wstxns1:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Citizenship_StatusObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="LocationObjectType">
+		<xsd:annotation xmlns:wstxns2="urn:com.workday/bsvc"
+			wstxns2:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:LocationObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="OrganizationObjectType">
+		<xsd:annotation xmlns:wstxns3="urn:com.workday/bsvc"
+			wstxns3:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:OrganizationObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Organization_SubtypeObjectType">
+		<xsd:annotation xmlns:wstxns4="urn:com.workday/bsvc"
+			wstxns4:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Organization_SubtypeObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Job_FamilyObjectType">
+		<xsd:annotation xmlns:wstxns5="urn:com.workday/bsvc"
+			wstxns5:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Job_FamilyObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Compensation_GradeObjectType">
+		<xsd:annotation xmlns:wstxns6="urn:com.workday/bsvc"
+			wstxns6:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Compensation_GradeObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Employee_TypeObjectType">
+		<xsd:annotation xmlns:wstxns7="urn:com.workday/bsvc"
+			wstxns7:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Employee_TypeObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Pay_Rate_TypeObjectType">
+		<xsd:annotation xmlns:wstxns8="urn:com.workday/bsvc"
+			wstxns8:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Pay_Rate_TypeObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Position_Worker_TypeObjectType">
+		<xsd:annotation xmlns:wstxns9="urn:com.workday/bsvc"
+			wstxns9:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Position_Worker_TypeObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Pay_GroupObjectType">
+		<xsd:annotation xmlns:wstxns10="urn:com.workday/bsvc"
+			wstxns10:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Pay_GroupObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="CompanyObjectType">
+		<xsd:annotation xmlns:wstxns11="urn:com.workday/bsvc"
+			wstxns11:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:CompanyObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Location_HierarchyObjectType">
+		<xsd:annotation xmlns:wstxns12="urn:com.workday/bsvc"
+			wstxns12:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Location_HierarchyObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Unique_IdentifierObjectType">
+		<xsd:annotation xmlns:wstxns13="urn:com.workday/bsvc"
+			wstxns13:Is_Reference_ID="1" />
+		<xsd:sequence>
+			<xsd:element name="ID" type="wd:Unique_IdentifierObjectIDType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="Descriptor" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Display information used to describe an instance
+					of an object. This 'optional' information is for outbound
+					descriptive purposes only and is not processed on inbound Workday
+					Web Services requests.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Citizenship_StatusObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Citizenship_StatusReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="LocationObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="wd:LocationReferenceEnumeration"
+					use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OrganizationObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:OrganizationReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Organization_SubtypeObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Organization_SubtypeReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Job_FamilyObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Job_FamilyReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Compensation_GradeObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Compensation_GradeReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Employee_TypeObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Employee_TypeReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Pay_Rate_TypeObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Pay_Rate_TypeReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Position_Worker_TypeObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Position_Worker_TypeReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Pay_GroupObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="wd:Pay_GroupReferenceEnumeration"
+					use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="CompanyObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="wd:CompanyReferenceEnumeration"
+					use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Location_HierarchyObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Location_HierarchyReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Unique_IdentifierObjectIDType">
+		<xsd:annotation>
+			<xsd:documentation>Contains a unique identifier for an instance of an
+				object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type"
+					type="wd:Unique_IdentifierReferenceEnumeration" use="required">
+					<xsd:annotation>
+						<xsd:documentation>The unique identifier type. Each "ID" for an
+							instance of an object contains a type and a value. A single
+							instance of an object can have multiple "ID" but only a single
+							"ID" per "type".</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Report_DataType">
+		<xsd:sequence>
+			<xsd:element name="Report_Entry" type="wd:Report_EntryType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Execute_ReportType">
+		<xsd:sequence>
+			<xsd:element name="Report_Parameters" type="wd:Report_ParametersType"
+				minOccurs="0" />
+			<xsd:element name="Authentication" type="wd:AuthenticationType"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MoneyType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="Currency_Code" type="xsd:string" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="AuthenticationType">
+		<xsd:sequence>
+			<xsd:element name="Proxy_User_Name" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
