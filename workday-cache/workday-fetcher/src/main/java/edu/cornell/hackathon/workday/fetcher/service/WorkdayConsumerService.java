@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
@@ -21,7 +22,8 @@ public class WorkdayConsumerService {
         this.config = config;
     }
 
-    public void fetchWorkdayData() {
+    public boolean fetchWorkdayData() {
+        boolean success = true;
         OkHttpClient client = new OkHttpClient();
 
         Unmarshaller unmarshaller;
@@ -42,15 +44,20 @@ public class WorkdayConsumerService {
                 response = client.newCall(request).execute();
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new RuntimeException(e);
+                success = false;
             }
 
             if (response != null && response.isSuccessful()) {
                 ReportDataType reportData = null;
                 try {
-                    reportData = (ReportDataType) unmarshaller.unmarshal(response.body().byteStream());
+                    JAXBElement<ReportDataType> reportDataJaxb = (JAXBElement<ReportDataType>) unmarshaller
+                            .unmarshal(response.body().byteStream());
+                    
+                    reportData = reportDataJaxb.getValue();
+                    
+                    System.out.println(reportData);
                 } catch (JAXBException e) {
-                    e.printStackTrace();
+                    success = false;
                 }
 
                 if (reportData != null) {
@@ -58,5 +65,7 @@ public class WorkdayConsumerService {
                 }
             }
         }
+
+        return success;
     }
 }
