@@ -8,7 +8,6 @@ public class App {
 
 		final DistCache distCache = new DistCache();
 
-
 	}
 
 }

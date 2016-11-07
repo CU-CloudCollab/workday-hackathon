@@ -25,6 +25,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>edu.cornell.hackathon.workday</groupId>
+			<artifactId>workday-models</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast-client</artifactId>
 			<version>${hazelcast.version}</version>
