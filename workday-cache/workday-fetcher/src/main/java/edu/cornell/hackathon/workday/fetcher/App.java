@@ -32,7 +32,8 @@ public class App {
         }
 
         //TODO read where hazelcast client config file is from config
-		final DistCache distCache = new DistCache();
+        String hazelcastURL = System.getenv("HAZELCAST");
+        final DistCache distCache = new DistCache(hazelcastURL);
 
         final WorkdayConsumerService consumerService = new WorkdayConsumerService(config, distCache);
 

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.client.config.ClientNetworkConfig;
 import com.hazelcast.core.HazelcastInstance;
 
 public class DistCache {
@@ -13,6 +14,14 @@ public class DistCache {
 	public DistCache(final ClientConfig config) {
 		hazelcast = HazelcastClient.newHazelcastClient(config);
 	}
+
+    public DistCache(final String hazelcastURL) {
+        ClientConfig config = new ClientConfig();
+        ClientNetworkConfig network = config.getNetworkConfig();
+        network.addAddress(hazelcastURL);
+
+        hazelcast = HazelcastClient.newHazelcastClient(config);
+    }
 
 	public DistCache() {
 		this(new ClientConfig());
