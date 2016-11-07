@@ -1,0 +1,12 @@
+server:
+  rootPath: /
+  applicationConnectors:
+    - type: http
+      port: 9999
+  gzip:
+    enabled: false
+  adminConnectors: []
+
+logging:
+  level: INFO
+
