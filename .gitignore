@@ -6,3 +6,17 @@ workday-cache/workday-distcache/.settings/org.eclipse.m2e.core.prefs
 workday-cache/workday-models/.settings/org.eclipse.core.resources.prefs
 workday-cache/workday-models/.settings/org.eclipse.jdt.core.prefs
 workday-cache/workday-models/.settings/org.eclipse.m2e.core.prefs
+/workday-cache/workday-models/.project
+/workday-cache/workday-models/.classpath
+/workday-cache/workday-fetcher/.settings
+/workday-cache/workday-fetcher/.project
+/workday-cache/workday-fetcher/.classpath
+/workday-cache/workday-distcache/.project
+/workday-cache/workday-distcache/.gitignore
+/workday-cache/workday-distcache/.classpath
+/workday-cache/target
+/workday-cache/.settings
+/workday-cache/.project
+/workday-cache/.DS_Store
+/workday-cache/.classpath
+/.DS_Store
