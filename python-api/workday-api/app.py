@@ -8,6 +8,16 @@ def index():
     return {'hello': 'world'}
 
 
+@app.route('/person/{netid}')
+def query_netid(netid):
+    # '/hello/james' -> {"hello": "james"}
+    return {'hello': netid}
+
+
+@app.route('/authenticated', api_key_required=True)
+def authenticated_request():
+    return {'hello': 'authenticated!'}
+
 # The view function above will return {"hello": "world"}
 # whenver you make an HTTP GET request to '/'.
 #
