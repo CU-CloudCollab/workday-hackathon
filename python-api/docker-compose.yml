@@ -1,0 +1,5 @@
+api:
+  build: .
+  volumes:
+    - ./workday-api:/home/app
+    - ~/.aws:/root/.aws

@@ -5,5 +5,5 @@ RUN mkdir /home/app
 WORKDIR /home/app
 
 # Copy in our requirements and install via pip
-COPY requirements.txt /home/app
-RUN pip install -r requirements.txt
+COPY requirements.txt /tmp
+RUN pip install -r /tmp/requirements.txt
