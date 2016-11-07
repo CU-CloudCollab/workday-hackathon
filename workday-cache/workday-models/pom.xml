@@ -3,17 +3,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>edu.cornell.hackathon</groupId>
 		<artifactId>workday</artifactId>
 		<version>0.0.1</version>
 	</parent>
+	
 	<groupId>edu.cornell.hackathon.workday</groupId>
 	<artifactId>workday-models</artifactId>
 	<name>workday-models</name>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
@@ -27,7 +31,6 @@
 			<version>2.2.11</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.jvnet.jaxb2_commons/jaxb2-commons-lang -->
 		<dependency>
 			<groupId>org.jvnet.jaxb2_commons</groupId>
 			<artifactId>jaxb2-commons-lang</artifactId>
@@ -40,14 +43,13 @@
 			<version>0.11.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

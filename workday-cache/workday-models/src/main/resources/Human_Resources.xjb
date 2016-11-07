@@ -9,7 +9,7 @@
 
     <jaxb:bindings schemaLocation="Human_Resources.xsd">
         <jaxb:schemaBindings>
-            <jaxb:package name="org.workday.models" />
+            <jaxb:package name="edu.cornell.hackathon.workday.model" />
         </jaxb:schemaBindings>
     </jaxb:bindings>
 
