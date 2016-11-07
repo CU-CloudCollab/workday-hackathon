@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>edu.cornell.hackathon</groupId>
+  <artifactId>workday</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+
+  <name>workday</name>
+  <url>http://maven.apache.org</url>
+
+  <description>XML Parser and Distributed Cache for Workday</description>
+
+	<organization>
+		<name>Cornell Institute for Social and Economic Research</name>
+		<url>https://ciser.cornell.edu</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Brandon T. Kowalski</name>
+			<email>btk44@cornell.edu</email>
+			<organization>Cornell University</organization>
+			<organizationUrl>https://cornell.edu</organizationUrl>
+		</developer>
+		<developer>
+			<name>Tim Parsons</name>
+			<email>tep46@cornell.edu</email>
+			<organization>Cornell University</organization>
+			<organizationUrl>https://cornell.edu</organizationUrl>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+  <dependencies>
+
+  </dependencies>
+  
+  <modules>
+  	<module>workday-models</module>
+  	<module>workday-distcache</module>
+  </modules>
+</project>
