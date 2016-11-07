@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wd:Report_Data xmlns:wd="urn:com.workday.report/Extract___Job_and_Person">
+<wd:Report_Entry>
+    <wd:Employee_ID>1112222</wd:Employee_ID>
+    <wd:Netid>net14</wd:Netid>
+    <wd:Legal_Name_in_General_Display_Format>Bruce Wayne</wd:Legal_Name_in_General_Display_Format>
+    <wd:Legal_Name_-_Last_Name>Wayne</wd:Legal_Name_-_Last_Name>
+    <wd:Legal_Name_-_Middle_Name></wd:Legal_Name_-_Middle_Name>
+    <wd:Legal_Name_-_First_Name>Bruce</wd:Legal_Name_-_First_Name>
+    <wd:Preferred_Name wd:Descriptor="Bruce Wayne">
+        <wd:ID wd:type="WID">9db0117ecf6e41d69d46f0dcc9e548f5</wd:ID>
+    </wd:Preferred_Name>
+    <wd:Preferred_Name_-_First_Name>Bruce</wd:Preferred_Name_-_First_Name>
+    <wd:Preferred_Name_-_Last_Name>Wayne</wd:Preferred_Name_-_Last_Name>
+    <wd:Original_Hire_Date>2008-10-17-07:00</wd:Original_Hire_Date>
+    <wd:Currently_Active>1</wd:Currently_Active>
+    <wd:On_Leave>0</wd:On_Leave>
+    <wd:Employee_Type wd:Descriptor="Regular">
+        <wd:ID wd:type="WID">bbb16da21c9544bcaac19a64c156bddc</wd:ID>
+        <wd:ID wd:type="Employee_Type_ID">Regular</wd:ID>
+    </wd:Employee_Type>
+    <wd:All_Positions___Jobs>
+        <wd:Job_Code>11111</wd:Job_Code>
+        <wd:Business_Title>Software Engineer IV</wd:Business_Title>
+        <wd:Position_ID>0263445</wd:Position_ID>
+        <wd:Primary_Job>1</wd:Primary_Job>
+        <wd:Position_Worker_Type wd:Descriptor="Regular">
+            <wd:ID wd:type="WID">bbb16da21c9544bcaac19a64c156bddc</wd:ID>
+            <wd:ID wd:type="Employee_Type_ID">Regular</wd:ID>
+        </wd:Position_Worker_Type>
+        <wd:Exempt>1</wd:Exempt>
+        <wd:Job_Family_Group wd:Descriptor="Staff">
+            <wd:ID wd:type="WID">761d798838a44eadaace8527fb375d76</wd:ID>
+            <wd:ID wd:type="Job_Family_ID">Staff</wd:ID>
+        </wd:Job_Family_Group>
+        <wd:Job_Families wd:Descriptor="Information Technology">
+            <wd:ID wd:type="WID">37eab71b81ec4c41b614682144ce295d</wd:ID>
+            <wd:ID wd:type="Job_Family_ID">IT</wd:ID>
+        </wd:Job_Families>
+        <wd:Location wd:Descriptor="Ithaca Main Campus">
+            <wd:ID wd:type="WID">0f272568cfa44b5783ebe2fce9fd8316</wd:ID>
+            <wd:ID wd:type="Location_ID">Ithaca Main Campus</wd:ID>
+        </wd:Location>
+        <wd:Location_Hierarchy wd:Descriptor="New York State">
+            <wd:ID wd:type="WID">c59fc9613a1e4fe89333ac79b47291a5</wd:ID>
+            <wd:ID wd:type="Organization_Reference_ID">New York State</wd:ID>
+        </wd:Location_Hierarchy>
+        <wd:Manager_ID>1211114</wd:Manager_ID>
+        <wd:Pay_Rate_Type wd:Descriptor="Salary">
+            <wd:ID wd:type="WID">676fee3f42b443a6988aeccef73bc972</wd:ID>
+            <wd:ID wd:type="Pay_Rate_Type_ID">Salary</wd:ID>
+        </wd:Pay_Rate_Type>
+        <wd:Scheduled_Weekly_Hours>40</wd:Scheduled_Weekly_Hours>
+        <wd:Default_Weekly_Hours>40</wd:Default_Weekly_Hours>
+        <wd:Actual_Job_Duration>12</wd:Actual_Job_Duration>
+        <wd:Standard_Full_Time_Duration>12</wd:Standard_Full_Time_Duration>
+        <wd:FTE__>100</wd:FTE__>
+        <wd:Company wd:Descriptor="Cornell University">
+            <wd:ID wd:type="WID">d18c756d193d4abf95829d343be66578</wd:ID>
+            <wd:ID wd:type="Organization_Reference_ID">Cornell_Endowed</wd:ID>
+            <wd:ID wd:type="Company_Reference_ID">Cornell_Endowed</wd:ID>
+        </wd:Company>
+        <wd:CU_College_Unit>RSRCH</wd:CU_College_Unit>
+        <wd:Supervisory_Organization_Subtype wd:Descriptor="SUBD">
+            <wd:ID wd:type="WID">11b9e951809f4229bc85d19c7363d1bb</wd:ID>
+            <wd:ID wd:type="Organization_Subtype_ID">SUBD</wd:ID>
+        </wd:Supervisory_Organization_Subtype>
+        <wd:Supervisory_Organization_Name>SOME - SILLY ORG</wd:Supervisory_Organization_Name>
+        <wd:Supervisory_Organization_Code>IT-MGMT</wd:Supervisory_Organization_Code>
+        <wd:CFINT-Position-Supervisory-Organization-RefID>PM-00110011</wd:CFINT-Position-Supervisory-Organization-RefID>
+        <wd:KFS_Org>3400-3447</wd:KFS_Org>
+        <wd:KFS_Org_Name wd:Descriptor="3400-3447 Research Administration Information Serv">
+            <wd:ID wd:type="WID">a016e33eebb6102d1471286b0f879580</wd:ID>
+            <wd:ID wd:type="Organization_Reference_ID">1265-3678 Wayne Foundation</wd:ID>
+            <wd:ID wd:type="Custom_Organization_Reference_ID">1265-3678 Wayne Foundation</wd:ID>
+        </wd:KFS_Org_Name>
+        <wd:Is_Temp_Casual>0</wd:Is_Temp_Casual>
+        <wd:Budgeted>Y</wd:Budgeted>
+    </wd:All_Positions___Jobs>
+</wd:Report_Entry>
+</wd:Report_Data>
