@@ -47,7 +47,7 @@ public class App {
                 System.out.println("Starting fetch");
                 System.out.println("Result of fetching: " + consumerService.fetchWorkdayData());
             }
-        }, 0, refreshInterval, TimeUnit.SECONDS);
+        }, 0, refreshInterval, TimeUnit.HOURS);
 	}
 
 }

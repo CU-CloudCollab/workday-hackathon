@@ -11,10 +11,11 @@ public class GuiceModule extends DropwizardAwareModule<WorkdayConfig> {
 	@Override
 	public void configure(final Binder binder) {
 
-		binder.bind(DistCache.class).toInstance(new DistCache());
+        DistCache distCache = new DistCache();
+
+        binder.bind(DistCache.class).toInstance(distCache);
 
 		binder.bind(WorkdayResource.class);
-
 	}
 
 }

@@ -16,6 +16,7 @@ import javax.xml.stream.XMLStreamReader;
 import edu.cornell.hackathon.workday.distcache.DistCache;
 import edu.cornell.hackathon.workday.fetcher.config.Config;
 import edu.cornell.hackathon.workday.jobandperson.model.ReportDataType;
+import edu.cornell.hackathon.workday.jobandperson.model.ReportEntryType;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -59,35 +60,38 @@ public class WorkdayConsumerService {
                 success = false;
             }
 
-            if (response != null && response.isSuccessful()) {
-                
-                
+            if (response != null) {
                 ReportDataType reportData = null;
                 try {
-                    XMLInputFactory xif = XMLInputFactory.newFactory();
-                    XMLStreamReader xsr = xif.createXMLStreamReader(response.body().byteStream());
-                    xsr.nextTag(); // Advance to Envelope tag
-                    xsr.nextTag(); // Advance to Body tag
-                    xsr.nextTag(); // Advance to getNumberResponse tag
+                    if (response.isSuccessful()) {
+                        XMLInputFactory xif = XMLInputFactory.newFactory();
+                        XMLStreamReader xsr = xif.createXMLStreamReader(response.body().byteStream());
+                        xsr.nextTag(); // Advance to Envelope tag
+                        xsr.nextTag(); // Advance to Body tag
+                        xsr.nextTag(); // Advance to getNumberResponse tag
 
-                    JAXBElement<ReportDataType> reportDataJaxb = unmarshaller
-                            .unmarshal(xsr, ReportDataType.class);
-                    
-                    reportData = reportDataJaxb.getValue();
-                    reportsByService.put(service.getKey(), reportData);
-                    
-                    System.out.println(reportData);
+                        JAXBElement<ReportDataType> reportDataJaxb = unmarshaller.unmarshal(xsr, ReportDataType.class);
+
+                        reportData = reportDataJaxb.getValue();
+                        reportsByService.put(service.getKey(), reportData);
+
+                        System.out.println(reportData);
+                    }
+
                 } catch (JAXBException | XMLStreamException e) {
                     success = false;
+                } finally {
+                    response.body().close();
                 }
             }
         }
         
         if (!reportsByService.isEmpty()) {
             for (Entry<String, ReportDataType> reports : reportsByService.entrySet()) {
-                distCache.clearAll(reports.getKey());
                 try {
-                    distCache.store(reports.getKey(), reports.getValue());
+                    for (ReportEntryType entry : reports.getValue().getReportEntry()) {
+                        distCache.store(reports.getKey(), entry);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     success = false;

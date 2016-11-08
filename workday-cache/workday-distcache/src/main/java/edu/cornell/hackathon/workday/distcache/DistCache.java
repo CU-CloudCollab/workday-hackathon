@@ -1,102 +1,185 @@
 package edu.cornell.hackathon.workday.distcache;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.ClientNetworkConfig;
+import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
 
+import edu.cornell.hackathon.workday.jobandperson.model.ReportEntryType;
+
 public class DistCache {
 
-	private final HazelcastInstance hazelcast;
+    private final HazelcastInstance hazelcast;
 
-	public DistCache(final ClientConfig config) {
-		hazelcast = HazelcastClient.newHazelcastClient(config);
-	}
+    public DistCache(final ClientConfig config) {
+        hazelcast = HazelcastClient.newHazelcastClient(config);
+    }
 
-	public DistCache(final String hazelcastURL) {
-		final ClientConfig config = new ClientConfig();
-		final ClientNetworkConfig network = config.getNetworkConfig();
-		network.addAddress(hazelcastURL);
+    public DistCache(final String hazelcastURL) {
+        final ClientConfig config = new ClientConfig();
+        final ClientNetworkConfig network = config.getNetworkConfig();
+        network.addAddress(hazelcastURL);
 
-		hazelcast = HazelcastClient.newHazelcastClient(config);
-	}
+        hazelcast = HazelcastClient.newHazelcastClient(config);
+    }
 
-	public DistCache() {
-		this(new ClientConfig());
-	}
+    public DistCache() {
+        hazelcast = Hazelcast.newHazelcastInstance();
+    }
 
-	public void store(final String setName, final Object obj) {
-		hazelcast.getSet(setName).add(obj);
-	}
+    public void store(final String setName, final ReportEntryType obj) {
+        hazelcast.getMap(setName).put(obj.getNetid(), obj);
+    }
 
-	public void storeAll(final String setName, final Collection<Object> objs) {
-		hazelcast.getSet(setName).addAll(objs);
-	}
+    public void storeAll(final String setName, final Collection<Object> objs) {
+        hazelcast.getMap(setName).put(UUID.randomUUID(), objs);
+    }
 
-	public void removeSingle(final String setName, final Object obj) {
-		hazelcast.getSet(setName).remove(obj);
-	}
+    public void removeSingle(final String setName, final Object obj) {
+        hazelcast.getSet(setName).remove(obj);
+    }
 
-	public void removeAll(final String setName, final  Collection<Object> objs) {
-		hazelcast.getSet(setName).removeAll(objs);
-	}
+    public void removeAll(final String setName, final Collection<Object> objs) {
+        hazelcast.getSet(setName).removeAll(objs);
+    }
 
-	public void clearAll(final String setName) {
-		hazelcast.getSet(setName).clear();
-	}
+    public void clearAll(final String setName) {
+        hazelcast.getMap(setName).clear();
+    }
 
-	public Object find(final String serviceName, final MultivaluedMap<String, String> queryParams) {
-		final IMap<String, Object> map = hazelcast.getMap(serviceName);
+    public Object find(final String serviceName, final MultivaluedMap<String, String> queryParams)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+            SecurityException {
+        final IMap<String, Object> map = hazelcast.getMap(serviceName);
 
-		final EntryObject e = new PredicateBuilder().getEntryObject();
+        System.out.println(map.size());
 
-		final List<PredicateBuilder> predicates = new ArrayList<>();
+        if (queryParams != null && !queryParams.isEmpty()) {
+            final EntryObject e = new PredicateBuilder().getEntryObject();
 
-		for (final Entry<String, List<String>> query : queryParams.entrySet()) {
+            final List<PredicateBuilder> predicates = new ArrayList<>();
 
-			final String key = query.getKey();
+            Map<String, Object> multiLevelQueries = new HashMap<>();
 
-			if (query.getValue().size() == 1) {
-				predicates.add(e.get(key).equal(query.getValue().get(0)));
-			} else if (query.getValue().size() > 1) {
+            for (final Entry<String, List<String>> query : queryParams.entrySet()) {
+                String[] queryParts = query.getKey().split("\\.");
 
-				final List<PredicateBuilder> tempPreds = new ArrayList<>();
+                if (queryParts.length > 1) {
+                    multiLevelQueries.put(query.getKey(), query.getValue().get(0));
+                    continue;
+                }
 
-				for (final String value : query.getValue()) {
-					tempPreds.add(e.get(key).equal(value));
-				}
+                final String key = query.getKey();
 
-				PredicateBuilder tempPred = null;
+                if (query.getValue().size() == 1) {
+                    predicates.add(e.get(key).equal(query.getValue().get(0)));
+                } else if (query.getValue().size() > 1) {
 
-				for (final PredicateBuilder temp : tempPreds) {
-					tempPred = tempPred != null ? tempPred.or(temp) : temp;
-				}
+                    final List<PredicateBuilder> tempPreds = new ArrayList<>();
 
-			}
-		}
+                    for (final String value : query.getValue()) {
+                        tempPreds.add(e.get(key).equal(value));
+                    }
 
-		PredicateBuilder finalPredicateBuilder = null;
+                    PredicateBuilder tempPred = null;
 
-		for (final PredicateBuilder builder : predicates) {
-			finalPredicateBuilder = finalPredicateBuilder != null ? finalPredicateBuilder.and(builder) : builder;
-		}
+                    for (final PredicateBuilder temp : tempPreds) {
+                        tempPred = tempPred != null ? tempPred.or(temp) : temp;
+                    }
 
-		final Predicate queryPredicate = finalPredicateBuilder;
+                }
+            }
 
-		return map.values(queryPredicate);
+            PredicateBuilder finalPredicateBuilder = null;
 
-	}
+            Collection<Object> values = null;
+            
+            if (!predicates.isEmpty()) {
+                System.out.println("Executing predicate builder");
+                for (final PredicateBuilder builder : predicates) {
+                    finalPredicateBuilder = finalPredicateBuilder != null ? finalPredicateBuilder.and(builder)
+                            : builder;
+                }
 
+                final Predicate queryPredicate = finalPredicateBuilder;
+
+                values = map.values(queryPredicate);
+            } else {
+                values = map.values();
+            }
+
+
+            Collection<Object> finalValues = new ArrayList<>();
+
+            if (!multiLevelQueries.isEmpty()) {
+                for (Entry<String, Object> multiLevelQuery : multiLevelQueries.entrySet()) {
+                    String[] queryParts = multiLevelQuery.getKey().split("\\.");
+                    for (Object value : values) {
+                        if (isEqual(value, queryParts, multiLevelQuery.getValue())) {
+                            finalValues.add(value);
+                        }
+                    }
+                }
+            } else {
+                finalValues = values;
+            }
+
+            return finalValues;
+
+        } else {
+            return map.get("foo");
+        }
+
+    }
+
+    private boolean isEqual(Object object, String[] queryParts, Object equalValue) throws IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+        if (queryParts.length > 0) {
+            if (object instanceof Collection) {
+                for (Object listObj : (Collection) object) {
+                    if (isEqual(listObj, queryParts, equalValue)) {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                String field = queryParts[0].substring(0, 1).toUpperCase() + queryParts[0].substring(1);
+                Object comparisonObj = object.getClass().getMethod("get" + field, null).invoke(object, null);
+
+                String[] subQueryParts = new String[queryParts.length - 1];
+                for (int j = 1; j < queryParts.length; j++) {
+                    subQueryParts[j - 1] = queryParts[j];
+                }
+
+                if (comparisonObj instanceof Collection) {
+                    for (Object listObj : (Collection) comparisonObj) {
+                        if (isEqual(listObj, subQueryParts, equalValue)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return isEqual(comparisonObj, subQueryParts, equalValue);
+            }
+        } else {
+            return object.equals(equalValue);
+        }
+    }
 
 }

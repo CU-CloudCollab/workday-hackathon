@@ -1,5 +1,6 @@
 package edu.cornell.hackathon.workday.resources;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -35,7 +36,9 @@ public class WorkdayResource {
 
 	@GET
 	@Path("/{serviceName}")
-	public APIResponse getReport(@PathParam("serviceName") final String name, @Context final UriInfo urlInfo) {
+    public APIResponse getReport(@PathParam("serviceName") final String name, @Context final UriInfo urlInfo)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+            SecurityException {
 
 		final MultivaluedMap<String, String> queryParams = urlInfo.getQueryParameters();
 
@@ -43,7 +46,13 @@ public class WorkdayResource {
 			System.out.println(e.getKey() + " = " + e.getValue());
 		}
 
-		return null;
+		Object found = cache.find(name, queryParams);
+		
+		APIResponse res = new APIResponse();
+        res.setData(found);
+		res.setServiceName(name);
+		
+		return res;
 	}
 
 }

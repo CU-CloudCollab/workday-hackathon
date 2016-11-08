@@ -12,6 +12,6 @@ public class APIResponse implements Serializable {
 	private static final long serialVersionUID = 1311468739752345678L;
 
 	private String serviceName;
-	private Serializable data;
+	private Object data;
 
 }
